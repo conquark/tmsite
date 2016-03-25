@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="assets/css/main.css" />
     <title>Document</title>
     
     <style>
         body {
-
+            background-image:none !important;
         }
         div {
 /*            padding:20px; */
@@ -91,30 +92,39 @@
             margin: 0 !important;
             font-size: 1.1em;
             size: 15 !important;
+            border-radius: 10px;
+/*            margin-bottom: 20px;*/
         }
         
         button {
             font-size: 1.1em;
         }
+        
+        tr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
-<body>
+<body id="body">
     <div style="position:absolute;top:5px;bottom:5px;left:5px;right:5px;background-color:white;opacity:.5;z-index:-1"></div>
     <div style='border:0px solid gray;border-radius:12px;'>
         <div id="spinner" style="display:none;text-align:center;background-color:white;border:1px solid white;border-radius:12px;">
-            <div style="padding:40px;"><img src="../img/Vector_Loading_fallback.gif" alt=""><br><br></div>
+            <div style="padding:40px;"><img src="images/Vector_Loading_fallback.gif" alt=""><br><br></div>
             <div id="spinnermessage" style="display:none;text-align:center">
         </div>
 
             
         </div>
         <div id="resettingPasswordMessage" style="display:none">
-           <div style="text-align:center"><img src="../img/Vector_Loading_fallback.gif" alt=""><br><br>Attempting to reset your password. Please wait a moment...</div>
+           <div style="text-align:center"><img src="images/Vector_Loading_fallback.gif" alt=""><br><br>Attempting to reset your password. Please wait a moment...</div>
 
         </div>
         <div id="emailSignInNotFoundError" class="error">Sorry, we couldn't find that email address. Try again?
         </div>
-        <div id="userexistserror" class="error">It looks like there's already an account with that email address. If you've forgotton your password, you can <a href="#" onclick="showForgotPassword()">reset it</a>, or you can <a href="" onclick="signIn()">sign in.</a></div>
+        <div id="userexistserror" class="error">It looks like there's already an account with that email address. <br><br>
+        If you've forgotton your PIN, you can email us at <strong>taskmasterforgot@nationaltheatre.com</strong> to have us re-send your information. <br><br>
+        If you already know your account information, you can log into the app with this email address and your PIN.</div>
         <div id="sponsornotfounderror" class="error">We weren't able to find that code. Try again?</div>
         <div id="signin" style="display:none">
             Sign in here. Use the same email and password on all of your family's devices. <br><br>
@@ -125,35 +135,46 @@
             <a onclick="showForgotPassword()" style="color:darkred;text-decoration:underline">Forgot your password?</a>
             </div>
         </div>
+<!--
+        <div id="notificationform" style="display:none">
+            <form id="notification" action="http://madabout.tv/cgi-bin/taskmastermail.pl" method="post">
+            <input id="notify-name" type="hidden" name="name" placeholder="name">
+            <input id="notifyemail" type="hidden" name="email" placeholder="email">
+            <input id="notifypin" type="hidden" name="pin" placeholder="pin">
+            <input type="submit">
+        </form>
+        </div>
+-->
         <div id="signup" style="display:none">
-            Sign up for an account <br><br>
+<!--            Sign up for an account <br><br>-->
             <div style="padding:0">
                <table>
                   <tr>
                       <td>
                           <div id="nameemptyerror" class="error">Name must not be empty</div>
-                          Your name ("Mom", "Dad", "Grandma", etc.) <br>
-                          <input size="15" type="text" name="signupname" id="signupname" placeholder="Your name">
+                          <strong>Your name</strong><br>("Mom", "Dad", "Grandma", etc.)<br>
+                          <input size="15" type="text" name="signupname" id="signupname" placeholder="Your name"><br><br>
                       </td>
                   </tr>
                    <tr>
                        <td >
-                          Enter your email address:<br>
-                          <span style="font-size:.8em;color:gray">(This email is for your family account. It will be used to set up your account on this device and any other devices you want to sync with this account</span> 
+                          <strong>Enter your email address:</strong><br>
+<!--                          <span style="font-size:.8em;color:gray">(This email is for your family account. It will be used to set up your account on this device and any other devices you want to sync with this account</span> -->
                        </td>
                    </tr>
                    <tr>
                        <td>
                            <div id="emailmatchingerror" class="error">Emails must match</div>
                            <div id="emailemptyerror" class="error">Email must not be empty</div>
-                           <input size="15" type="text" name="signupemail" id="signupemail" placeholder="Your Email">
+                           <input size="15" type="text" name="signupemail" id="signupemail" placeholder="Your Email"><br><br>
                        </td>
                    </tr>
                    <tr>
-                       <td>Email again:</td>
+                       <td><strong>Confirm your email address:</strong></td>
                    </tr>
-                   <tr><td><input size="15" type="text" name="signupemailverify" id="signupemailverify" placeholder="Enter your email again"></td></tr>
+                   <tr><td><input size="15" type="text" name="signupemailverify" id="signupemailverify" placeholder="Email confirm"></td></tr>
                    <tr><td>&nbsp;</td></tr>
+<!--
                    <tr>
                        <td>
                            <div id="passwordmatchingerror" class="error">Passwords must match</div>
@@ -166,21 +187,19 @@
                        <td>Password again:</td>
                    </tr>
                    <tr><td><input size="15" type="text" name="signuppasswordverify" id="signuppasswordverify" placeholder="Enter your password again"></td></tr>
+-->
                    <tr>
                        <td>
                           <div id="pinemptyerror" class="error">Pin must not be empty</div>
                           <div id="pinnot4digitserror" class="error">Pin must be 4 digits</div>
-                           Choose a PIN (this is how you'll access the app from now on):
+                           <strong>Choose a 4-digit PIN:</strong>
                         </td>
                    </tr>
-                   <tr><td><input size="15" type="number" name="pin" id="signuppin" placeholder="Choose a 4-digit PIN number"></td></tr>
+                   <tr><td><input size="15" type="number" name="pin" id="signuppin" placeholder="4-digit PIN"><br><br></td></tr>
                    <tr><td><strong>Sponsor code</strong></td></tr>
                    <tr><td>If you have a sponsor code, enter it here. Your sponsor code unlocks additional features in the app!</td></tr>
-                   <tr>
-                       <td>Sponsor code:</td>
-                   </tr>
-                   <tr><td><input size="15" type="text" name="signupsponsor" id="signupsponsor" placeholder="Sponsor Code"></td></tr>
-                   <tr><td><button style="padding:10px;font-size:1.1em;border:1px solid black;border-radius:10px" onclick="doSignUp()">Sign up</button></td></tr>
+                   <tr><td><input size="15" type="text" name="signupsponsor" id="signupsponsor" placeholder="Sponsor Code"><br><br></td></tr>
+                   <tr><td><button style="padding:10px;font-size:1.1em;border:1px solid black;border-radius:10px" onclick="doSignUp()">Sign up</button><br><br></td></tr>
                    <tr><td><button style="border:1px solid black; border-radius:10px;padding:10px;font-size:1.1em;" onclick="hideSignUp()">Cancel</button></td></tr>
                </table>         
             </div>
@@ -191,8 +210,8 @@
             <button onclick=resetPassword()>Reset my password</button>
         </div>
         <div>
-            <div id="bluesignin" class="button" onclick="showSignIn()">Sign In</div>
-            <div class="button button-signup" onclick="showSignUp()">Sign up for an account</div>
+<!--            <div id="bluesignin" class="button" onclick="showSignIn()">Sign In</div>-->
+            <div id="greensignup" class="button button-signup" style="margin-top:20px;" onclick="showSignUp()">Sign up for an account</div>
             <div class="button button-forgot" id="passwordResetButton" style="display:none;" onclick="showForgotPassword()">Reset Password</div>
         </div>            
     </div>
@@ -207,7 +226,7 @@
         var userDB = new PouchDB('https://bturner:glasgow8mysoup@bturner.cloudant.com/taskmasterusers');
         
         var localusers = {};
-        var spinner = '<div style="padding:40px;"><img src="../img/Vector_Loading_fallback.gif" alt=""><br><br></div>';
+        var spinner = '<div style="padding:40px;"><img src="images/Vector_Loading_fallback.gif" alt=""><br><br></div>';
         var spinnermessage = document.getElementById("spinnermessage");
         var okeydoke = '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGHO8tBkyWagQ99D6YQIvTOBeIsMpbzUF0npUFP_JUf99yOFBawxbXQaVa" alt="">';
         var ohno = '<img src="http://www.thegatewaypundit.com/wp-content/uploads/2012/07/mr-bill.jpg" alt="" width="200">';
@@ -287,8 +306,9 @@
 //                        alert('SPONSORCODE IS VALID');
                         setSpinnerMessage('Sponsor code validated...');
                         setTimeout(function() {
-                            setSpinnerMessage('Setting up device...');
+                            setSpinnerMessage('Completing registration...');
                             setSignUpLocalStorageItems();
+                            submitForm();
                         },1500);
                     }
                 }
@@ -312,7 +332,9 @@
                 }
                 for (var i = 0; i < userDatabase.length; i++) {
                     var record = userDatabase[i];
-                    if (record.email === email) {
+                    var recordEmailLowerCase = record.email.toLowerCase();
+                    var emailLowerCase = email.toLowerCase();
+                    if (recordEmailLowerCase === emailLowerCase) {
                         // USER EXISTS
                         userExists = true;
                         userRecord = record;
@@ -333,8 +355,10 @@
                     } else {
                         spinnerHide();
                         hideSpinnerMessage();
-                        alert('signing in without a code...');
-                        alert('so, yeah, put localstorage and stuff here.')
+                        var defaultCode = 'zerocode';
+                        checkSponsorDB(defaultCode);
+//                        alert('signing in without a code...');
+//                        alert('so, yeah, put localstorage and stuff here.')
                     }
                 }
             });
@@ -379,7 +403,7 @@
                         console.log('password does not match!');
                         spinnerHide();
                         hideSpinnerMessage();
-                        showSignIn();
+//                        showSignIn();
                         displayPasswordError();
                     }
                 }
@@ -442,8 +466,8 @@
             
             email1 = document.getElementById("signupemail").value;
             email2 = document.getElementById("signupemailverify").value;
-            pword1 = document.getElementById("signuppassword").value;
-            pword2 = document.getElementById("signuppasswordverify").value;
+//            pword1 = document.getElementById("signuppassword").value;
+//            pword2 = document.getElementById("signuppasswordverify").value;
             signuppin = document.getElementById("signuppin").value; 
             pinempty = document.getElementById("signuppin").value === null
                         || document.getElementById("signuppin").value === "";
@@ -452,6 +476,25 @@
                         || document.getElementById("signupname").value === "";
             proceedWithSignUp = true;
             thesignupsponsorcode = document.getElementById("signupsponsor").value;
+            
+//            document.getElementById("notifyname").value = signupname;
+//            document.getElementById("notifyemail").value = email1;
+//            document.getElementById("notifypin").value = signuppin;
+            
+            function submitForm() {
+                var http = new XMLHttpRequest();
+                http.open("POST", "http://madabout.tv/cgi-bin/taskmastermail.pl", true);
+                http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                var params = {
+                    "name": signupname,
+                    "email": email1,
+                    "pin": signuppin
+                }
+                http.send(params);
+                http.onload = function() {
+                    alert(http.responseText);
+                }
+            }
             
             var showEmailMatchingError = function() {
                 document.getElementById("emailmatchingerror").style.display = 'block';
@@ -516,12 +559,12 @@
                 hideEmailEmptyError();
             }
 
-            if (pword1.length < 1) {
-                showPasswordEmptyError();
-                proceedWithWignUp = false;
-            } else {
-                hidePasswordEmptyError();
-            }
+//            if (pword1.length < 1) {
+//                showPasswordEmptyError();
+//                proceedWithWignUp = false;
+//            } else {
+//                hidePasswordEmptyError();
+//            }
 
             if (email1 !== email2) {
                 showEmailMatchingError();
@@ -529,12 +572,12 @@
             } else {
                 hideEmailMatchingError();
             }
-            if (pword1 !== pword2) {
-                showPasswordMatchingError();
-                proceedWithSignUp = false;
-            } else {
-                hidePasswordMatchingError();
-            }
+//            if (pword1 !== pword2) {
+//                showPasswordMatchingError();
+//                proceedWithSignUp = false;
+//            } else {
+//                hidePasswordMatchingError();
+//            }
             if (pinempty) {
                 showPinEmptyError();
                 proceedWithSignUp = false;
@@ -582,31 +625,34 @@
         var showPasswordResetButton = function() {
             document.getElementById("passwordResetButton").style.display = 'block';
         }
-        var showSignIn = function() {
-            hideSpinnerMessage();
-            document.getElementById("signin").style.display = 'block';
-            document.getElementById("signup").style.display = 'none';
-            document.getElementById("forgotpassword").style.display = 'none';
-            document.getElementById("bluesignin").style.display = 'none';
-            
-        }
+//        var showSignIn = function() {
+//            hideSpinnerMessage();
+//            document.getElementById("signin").style.display = 'block';
+//            document.getElementById("signup").style.display = 'none';
+//            document.getElementById("forgotpassword").style.display = 'none';
+//            document.getElementById("bluesignin").style.display = 'none';
+//            
+//        }
         
         var hideSignIn = function() {
             document.getElementById("signin").style.display = 'none';
-            document.getElementById("bluesignin").style.display = 'block';
+//            document.getElementById("bluesignin").style.display = 'block';
         }
         
         var showSignUp = function() {
             hideSpinnerMessage();
             document.getElementById("signin").style.display = 'none';
             document.getElementById("signup").style.display = 'block';
+            document.getElementById("greensignup").style.display = 'none';
             document.getElementById("forgotpassword").style.display = 'none';
-            document.getElementById("bluesignin").style.display = 'block';
+//            document.getElementById("bluesignin").style.display = 'block';
             hideAllErrors();
         }
         
         var hideSignUp = function() {
             document.getElementById("signup").style.display = 'none';
+            document.getElementById("greensignup").style.display = 'block';
+            window.parent.scrollBy(0,-560);
         }
         
         var showForgotPassword = function() {
@@ -614,7 +660,7 @@
             document.getElementById("signin").style.display = 'none';
             document.getElementById("signup").style.display = 'none';
             document.getElementById("forgotpassword").style.display = 'block';
-            document.getElementById("bluesignin").style.display = 'block';
+//            document.getElementById("bluesignin").style.display = 'block';
             hideEmailNotFoundError();
             hideAllErrors();
         }
@@ -683,7 +729,9 @@
         
         var setSignUpLocalStorageItemsFromRecord = function(record) {
             window.localStorage.setItem("familyEmail", record.email);
-            window.localStorage.setItem("familyPassword", record.password);
+            // the following line is a change from original: using
+            // the pin as the password
+            window.localStorage.setItem("familyPassword", record.pin);
             window.localStorage.setItem("primaryName", record.name);
             window.localStorage.setItem("primaryPin", record.pin);
             window.localStorage.setItem("cloudDBName", record.theCloudDBName);
@@ -729,7 +777,7 @@
                         console.log('newLocalFamilyDB is: ');
                         console.log(testNewDB);
                         console.log('if there was something there, we can move on to next page I think.');
-                        location.href = '../index.html';
+                        location.href = 'success.html';
                     }).catch(function(err) {
                         console.log('unable to get allDocs from newLocalFamilyDB. error was ' + err);
                     })
@@ -744,8 +792,8 @@
         var setSignUpLocalStorageItems = function(record) {
         var email1 = document.getElementById("signupemail").value;
         var email2 = document.getElementById("signupemailverify").value;
-        var pword1 = document.getElementById("signuppassword").value;
-        var pword2 = document.getElementById("signuppasswordverify").value;
+//        var pword1 = document.getElementById("signuppassword").value;
+//        var pword2 = document.getElementById("signuppasswordverify").value;
         var signuppin = document.getElementById("signuppin").value; 
         var signupname = document.getElementById("signupname").value;
         var thesignupsponsorcode = document.getElementById("signupsponsor").value;
@@ -754,7 +802,7 @@
             theCloudDBName = theCloudDBName.replace(/:|-|\./g, '').toLowerCase();
             
             window.localStorage.setItem("familyEmail", email1);
-            window.localStorage.setItem("familyPassword", pword1);
+            window.localStorage.setItem("familyPassword", signuppin);
             window.localStorage.setItem("primaryName", signupname);
             window.localStorage.setItem("primaryPin", signuppin);
             window.localStorage.setItem("cloudDBName", theCloudDBName);
@@ -773,10 +821,11 @@
                 log('sponsorCode:' + window.localStorage.getItem("sponsorCode"));
             }
             
+            // using the pin as the password from now on (2016-03-23)
             var newUserRecord = {
                 _id: theCloudDBName,
                 email: email1,
-                password: pword1,
+                password: signuppin,
                 sponsorcode: thesignupsponsorcode,
                 theCloudDBName: theCloudDBName,
                 pin: signuppin,
@@ -823,7 +872,7 @@
                         console.log(primaryUser);
                         newLocalFamilyDB.put(primaryUser).then(function(result) {
                             console.log('finished putting primary user into db');
-                            location.href = '../index.html';
+                            location.href = 'success.html';
                         }).catch(function(err) {
                             console.log('error: not able to put the primary user');
                         });                            

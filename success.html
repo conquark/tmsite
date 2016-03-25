@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Success!</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body style="color:black;padding:20px;font-size:1.2em;background-color:white;background-image:none !important;">
+    <div style="text-align:center;"><img src="images/taskmaster.png" alt="" width="150"> <br><br></div>
+    <h2>Success!</h2> 
+    <p>Your account has been created! Below is your family's account information. <strong>Please print or copy this information to a safe place.</strong> You'll need this to set up each phone or tablet:</p>
+    
+    <div style="text-align:center;padding:30px;border:4px solid green; border-radius:12px;background:beige;">
+        Save this information to log into your devices:
+        <p>email: 
+        <strong>
+            <script>
+                var theEmail = window.localStorage.getItem("familyEmail");
+                var thePIN = window.localStorage.getItem("primaryPin");
+                document.write(theEmail);
+            </script>
+        </strong> <br>
+        PIN: <strong>
+            <script>
+                document.write(thePIN);
+            </script>
+        </strong><br></p>
+<!--
+        <p>This information has also been emailed to 
+        <script>
+            document.write(theEmail);    
+        </script>.</p>
+-->
+    </div>    
+    <p>Now download the app! <br>
+    Android <br>
+    Apple App Store</p>
+    
+</body>
+</html>
